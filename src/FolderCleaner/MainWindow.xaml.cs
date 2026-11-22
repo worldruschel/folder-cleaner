@@ -168,6 +168,43 @@ public partial class MainWindow : Window
         }
     }
 
+    private void FeedbackButton_Click(object sender, RoutedEventArgs e)
+    {
+        const string email = "worldruschel@gmail.com";
+        string subject = Uri.EscapeDataString($"Чистильщик папок ({UpdateService.CurrentVersionDisplay}) — обратная связь");
+        string body = Uri.EscapeDataString("Здравствуйте!\n\nМои предложения или замечания:\n");
+        string mailtoUrl = $"mailto:{email}?subject={subject}&body={body}";
+
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = mailtoUrl,
+                UseShellExecute = true
+            });
+        }
+        catch
+        {
+            try
+            {
+                string gmailUrl = $"https://mail.google.com/mail/?view=cm&fs=1&to={email}&su={subject}&body={body}";
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = gmailUrl,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this,
+                    $"Вы можете написать напрямую на почту: {email}\n\n({ex.Message})",
+                    "Обратная связь",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
+        }
+    }
+
     private void FolderPathBox_TextChanged(object sender, TextChangedEventArgs e)
     {
         FolderPlaceholder.Visibility = string.IsNullOrWhiteSpace(FolderPathBox.Text)
