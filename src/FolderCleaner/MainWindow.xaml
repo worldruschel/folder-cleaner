@@ -63,12 +63,20 @@
                                Foreground="#1E40AF" />
                 </Border>
                 <Button x:Name="CheckUpdatesButton"
-                        Content="v1.0.0  🔄"
+                        Content="v1.0.1  🔄"
                         ToolTip="Проверить обновления на GitHub"
                         Style="{StaticResource SecondaryButton}"
                         Padding="10,6"
                         FontSize="12"
+                        Margin="0,0,8,0"
                         Click="CheckUpdatesButton_Click" />
+                <Button x:Name="DonateButton"
+                        Content="❤️"
+                        ToolTip="Поддержать автора на Boosty"
+                        Style="{StaticResource RowDeleteButton}"
+                        Padding="10,6"
+                        FontSize="12.5"
+                        Click="DonateButton_Click" />
             </StackPanel>
         </Grid>
 

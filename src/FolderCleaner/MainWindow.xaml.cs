@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
@@ -145,6 +146,26 @@ public partial class MainWindow : Window
     private void DismissUpdateButton_Click(object sender, RoutedEventArgs e)
     {
         UpdateBanner.Visibility = Visibility.Collapsed;
+    }
+
+    private void DonateButton_Click(object sender, RoutedEventArgs e)
+    {
+        try
+        {
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = "https://boosty.to/worldruschel/donate",
+                UseShellExecute = true
+            });
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(this,
+                $"Не удалось открыть ссылку:\n{ex.Message}",
+                "Ошибка",
+                MessageBoxButton.OK,
+                MessageBoxImage.Warning);
+        }
     }
 
     private void FolderPathBox_TextChanged(object sender, TextChangedEventArgs e)
